@@ -1,0 +1,448 @@
+{% extends 'base.html' %}
+
+{% block title %}AkriOnline - India's Premier Sustainable Marketplace{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 z-0">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-emerald-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
+        <div class="absolute top-40 right-10 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-20 left-20 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" style="animation-delay: 4s;"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="reveal">
+            <!-- Main Headline -->
+            <h1 class="font-display font-black text-6xl sm:text-7xl lg:text-8xl mb-8 leading-tight">
+                <span class="text-gray-900">Sustainable</span>
+                <br>
+                <span class="gradient-primary bg-clip-text text-transparent text-glow">Trading</span>
+                <br>
+                <span class="text-gray-700">Revolution</span>
+            </h1>
+            
+            <!-- Subtitle -->
+            <p class="text-xl sm:text-2xl lg:text-3xl text-gray-600 mb-12 max-w-4xl mx-auto font-light leading-relaxed">
+                Transform waste into wealth while saving the planet. 
+                <span class="font-semibold text-emerald-600">AI-powered</span> marketplace for 
+                <span class="font-semibold text-blue-600">scrap trading</span> and 
+                <span class="font-semibold text-purple-600">reusable items</span>.
+            </p>
+            
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+                <a href="#marketplace" class="btn-primary text-white px-12 py-4 rounded-full text-lg font-semibold flex items-center space-x-3 hover-lift group">
+                    <span>Start Trading</span>
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                    </svg>
+                </a>
+                
+                <a href="#how-it-works" class="glass text-gray-700 px-12 py-4 rounded-full text-lg font-semibold flex items-center space-x-3 hover-lift group border-2 border-emerald-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>How It Works</span>
+                </a>
+            </div>
+            
+            <!-- Platform Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="glass p-6 rounded-3xl hover-lift">
+                    <div class="text-3xl font-bold text-emerald-600 mb-2">{{ total_users|floatformat:0 }}+</div>
+                    <div class="text-gray-600 font-medium">Active Users</div>
+                </div>
+                <div class="glass p-6 rounded-3xl hover-lift">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">{{ total_scrap_traded|floatformat:0 }}kg</div>
+                    <div class="text-gray-600 font-medium">Scrap Traded</div>
+                </div>
+                <div class="glass p-6 rounded-3xl hover-lift">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">{{ co2_saved|floatformat:0 }}kg</div>
+                    <div class="text-gray-600 font-medium">CO₂ Saved</div>
+                </div>
+                <div class="glass p-6 rounded-3xl hover-lift">
+                    <div class="text-3xl font-bold text-orange-600 mb-2">{{ successful_transactions|floatformat:0 }}+</div>
+                    <div class="text-gray-600 font-medium">Successful Deals</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Elements -->
+    <div class="absolute bottom-10 left-10 float">
+        <div class="w-20 h-20 rounded-full gradient-primary opacity-20"></div>
+    </div>
+    <div class="absolute top-1/2 right-20 float" style="animation-delay: 2s;">
+        <div class="w-16 h-16 rounded-full gradient-secondary opacity-20"></div>
+    </div>
+</section>
+
+<!-- Dual Marketplace Section -->
+<section id="marketplace" class="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <h2 class="font-display font-bold text-5xl lg:text-6xl text-gray-900 mb-6">
+                Dual <span class="gradient-primary bg-clip-text text-transparent">Marketplace</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Two powerful platforms in one - trade scrap materials and exchange reusable items seamlessly
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12">
+            <!-- Scrap Trading Card -->
+            <div class="reveal glass p-8 rounded-3xl hover-lift border-2 border-emerald-100 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 gradient-primary opacity-10 rounded-full transform translate-x-16 -translate-y-16"></div>
+                
+                <div class="relative z-10">
+                    <div class="w-16 h-16 rounded-2xl gradient-primary flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                    </div>
+                    
+                    <h3 class="font-display font-bold text-3xl text-gray-900 mb-4">Scrap Trading</h3>
+                    <p class="text-gray-600 text-lg mb-6">
+                        Sell your scrap materials directly to businesses. AI-powered quality assessment ensures fair pricing.
+                    </p>
+                    
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center">
+                                <svg class="w-3 h-3 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">AI-powered material recognition</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center">
+                                <svg class="w-3 h-3 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Instant quality grading</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center">
+                                <svg class="w-3 h-3 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Direct business connections</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <button class="btn-primary text-white px-6 py-3 rounded-xl font-semibold flex-1">
+                            Sell Scrap
+                        </button>
+                        <button class="glass border-2 border-emerald-200 text-emerald-700 px-6 py-3 rounded-xl font-semibold flex-1">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reusable Items Card -->
+            <div class="reveal glass p-8 rounded-3xl hover-lift border-2 border-blue-100 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 gradient-secondary opacity-10 rounded-full transform translate-x-16 -translate-y-16"></div>
+                
+                <div class="relative z-10">
+                    <div class="w-16 h-16 rounded-2xl gradient-secondary flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                    </div>
+                    
+                    <h3 class="font-display font-bold text-3xl text-gray-900 mb-4">Reusable Items</h3>
+                    <p class="text-gray-600 text-lg mb-6">
+                        Buy, sell, or exchange pre-loved items. Extend product lifecycles and reduce waste.
+                    </p>
+                    
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center">
+                                <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">AI condition assessment</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center">
+                                <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Multiple transaction types</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center">
+                                <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Community-driven platform</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <button class="gradient-secondary text-white px-6 py-3 rounded-xl font-semibold flex-1">
+                            Browse Items
+                        </button>
+                        <button class="glass border-2 border-blue-200 text-blue-700 px-6 py-3 rounded-xl font-semibold flex-1">
+                            List Item
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI Features Section -->
+<section class="py-20 bg-gray-900 text-white relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0); background-size: 50px 50px;"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <h2 class="font-display font-bold text-5xl lg:text-6xl mb-6">
+                AI-Powered <span class="gradient-primary bg-clip-text text-transparent">Intelligence</span>
+            </h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                Advanced machine learning algorithms revolutionizing how we assess, price, and trade materials
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Material Recognition -->
+            <div class="reveal glass p-8 rounded-3xl hover-lift text-center">
+                <div class="w-20 h-20 rounded-full gradient-primary mx-auto mb-6 flex items-center justify-center">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                    </svg>
+                </div>
+                <h3 class="font-display font-bold text-2xl mb-4">Smart Recognition</h3>
+                <p class="text-gray-300 mb-6">
+                    Upload a photo and let our AI instantly identify material types, brands, and quality grades with 95% accuracy.
+                </p>
+                <div class="text-emerald-400 font-semibold">95% Accuracy Rate</div>
+            </div>
+
+            <!-- Quality Assessment -->
+            <div class="reveal glass p-8 rounded-3xl hover-lift text-center" style="animation-delay: 0.2s;">
+                <div class="w-20 h-20 rounded-full gradient-primary mx-auto mb-6 flex items-center justify-center">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h3 class="font-display font-bold text-2xl mb-4">Quality Grading</h3>
+                <p class="text-gray-300 mb-6">
+                    Advanced algorithms assess condition, wear, and value to provide accurate quality grades and fair pricing.
+                </p>
+                <div class="text-blue-400 font-semibold">Fair Price Guarantee</div>
+            </div>
+
+            <!-- Market Insights -->
+            <div class="reveal glass p-8 rounded-3xl hover-lift text-center" style="animation-delay: 0.4s;">
+                <div class="w-20 h-20 rounded-full gradient-primary mx-auto mb-6 flex items-center justify-center">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                </div>
+                <h3 class="font-display font-bold text-2xl mb-4">Market Insights</h3>
+                <p class="text-gray-300 mb-6">
+                    Real-time market data and predictive analytics help you make informed decisions about when to buy or sell.
+                </p>
+                <div class="text-purple-400 font-semibold">Real-time Data</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Eco Points System -->
+<section class="py-20 bg-gradient-to-br from-emerald-50 to-blue-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <h2 class="font-display font-bold text-5xl lg:text-6xl text-gray-900 mb-6">
+                <span class="gradient-primary bg-clip-text text-transparent">Eco Points</span> System
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Earn rewards for your sustainable actions. Every transaction makes a difference for our planet.
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Eco Points Visual -->
+            <div class="reveal glass p-12 rounded-3xl hover-lift border-2 border-emerald-100 text-center">
+                <div class="w-32 h-32 rounded-full gradient-primary mx-auto mb-8 flex items-center justify-center pulse-slow">
+                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                
+                <h3 class="font-display font-bold text-4xl text-gray-900 mb-4">15,000+</h3>
+                <p class="text-gray-600 text-lg mb-8">Eco Points Distributed</p>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 glass rounded-xl">
+                        <span class="font-semibold text-gray-700">Selling Scrap</span>
+                        <span class="text-emerald-600 font-bold">+10 Points</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 glass rounded-xl">
+                        <span class="font-semibold text-gray-700">Giving Away Items</span>
+                        <span class="text-blue-600 font-bold">+15 Points</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 glass rounded-xl">
+                        <span class="font-semibold text-gray-700">Successful Reviews</span>
+                        <span class="text-purple-600 font-bold">+5 Points</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Redemption Options -->
+            <div class="reveal space-y-8">
+                <div>
+                    <h3 class="font-display font-bold text-3xl text-gray-900 mb-6">Redeem Your Points</h3>
+                    <p class="text-lg text-gray-600 mb-8">
+                        Turn your eco-friendly actions into real rewards and benefits.
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="glass p-6 rounded-2xl hover-lift flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-900">Wallet Cashout</h4>
+                            <p class="text-gray-600">Convert points to real money</p>
+                        </div>
+                        <div class="text-emerald-600 font-bold">100 pts = ₹10</div>
+                    </div>
+
+                    <div class="glass p-6 rounded-2xl hover-lift flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14a1 1 0 011 1v8a1 1 0 01-1 1H5a1 1 0 01-1-1v-8a1 1 0 011-1z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-900">Platform Discounts</h4>
+                            <p class="text-gray-600">Special discounts on purchases</p>
+                        </div>
+                        <div class="text-blue-600 font-bold">Up to 20% off</div>
+                    </div>
+
+                    <div class="glass p-6 rounded-2xl hover-lift flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-900">Charity Donations</h4>
+                            <p class="text-gray-600">Donate to environmental causes</p>
+                        </div>
+                        <div class="text-purple-600 font-bold">Make a difference</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section id="how-it-works" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <h2 class="font-display font-bold text-5xl lg:text-6xl text-gray-900 mb-6">
+                How It <span class="gradient-primary bg-clip-text text-transparent">Works</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Simple steps to start your sustainable trading journey
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-8">
+            <!-- Step 1 -->
+            <div class="reveal text-center hover-lift">
+                <div class="w-20 h-20 rounded-full gradient-primary mx-auto mb-6 flex items-center justify-center text-white font-bold text-2xl">
+                    1
+                </div>
+                <h3 class="font-display font-bold text-xl text-gray-900 mb-4">Upload Photo</h3>
+                <p class="text-gray-600">
+                    Take a photo of your item or scrap material. Our AI will do the rest.
+                </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="reveal text-center hover-lift" style="animation-delay: 0.1s;">
+                <div class="w-20 h-20 rounded-full gradient-primary mx-auto mb-6 flex items-center justify-center text-white font-bold text-2xl">
+                    2
+                </div>
+                <h3 class="font-display font-bold text-xl text-gray-900 mb-4">AI Assessment</h3>
+                <p class="text-gray-600">
+                    Get instant quality grading and price suggestions powered by AI.
+                </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="reveal text-center hover-lift" style="animation-delay: 0.2s;">
+                <div class="w-20 h-20 rounded-full gradient-primary mx-auto mb-6 flex items-center justify-center text-white font-bold text-2xl">
+                    3
+                </div>
+                <h3 class="font-display font-bold text-xl text-gray-900 mb-4">List & Connect</h3>
+                <p class="text-gray-600">
+                    Create your listing and connect with interested buyers or sellers.
+                </p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="reveal text-center hover-lift" style="animation-delay: 0.3s;">
+                <div class="w-20 h-20 rounded-full gradient-primary mx-auto mb-6 flex items-center justify-center text-white font-bold text-2xl">
+                    4
+                </div>
+                <h3 class="font-display font-bold text-xl text-gray-900 mb-4">Earn Points</h3>
+                <p class="text-gray-600">
+                    Complete transactions and earn eco points for sustainable actions.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-20 bg-gray-900 text-white relative overflow-hidden">
+    <div class="absolute inset-0 gradient-primary opacity-10"></div>
+    
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="reveal">
+            <h2 class="font-display font-bold text-5xl lg:text-6xl mb-6">
+                Ready to Make a <span class="gradient-primary bg-clip-text text-transparent">Difference?</span>
+            </h2>
+            <p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+                Join thousands of users who are already transforming waste into wealth while protecting our planet.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="{% url 'accounts:register' %}" class="btn-primary text-white px-12 py-4 rounded-full text-lg font-semibold hover-lift">
+                    Start Trading Today
+                </a>
+                <a href "#marketplace" class="glass border-2 border-white/20 text-white px-12 py-4 rounded-full text-lg font-semibold hover-lift">
+                    Explore Marketplace
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
