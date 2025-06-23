@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 app_name = 'accounts'
@@ -8,6 +8,9 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('register/', views.register_view, name='register'),
     path('logout/', views.logout_view, name='logout'),
+    
+    # Google auth placeholder (handled by allauth)
+    path('google/login/', views.google_login_redirect, name='google_login'),
     
     # Dealer URLs
     path('dealer/register/', views.dealer_register_view, name='dealer_register'),
@@ -22,4 +25,11 @@ urlpatterns = [
     
     # Price comparison
     path('prices/', views.price_comparison, name='price_comparison'),
+    
+    # Profile management
+    path('profile/', views.profile_view, name='profile'),
+    path('profile/edit/', views.edit_profile, name='edit_profile'),
+    
+    # Allauth URLs
+    path('auth/', include('allauth.urls')),
 ]
