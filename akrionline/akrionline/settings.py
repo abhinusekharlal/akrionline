@@ -155,5 +155,5 @@ LOGOUT_REDIRECT_URL = '/'
 # Email configuration (for development)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# Custom User Model (if needed later)
-# AUTH_USER_MODEL = 'accounts.CustomUser'
+# Custom User Model
+AUTH_USER_MODEL = 'accounts.User'
