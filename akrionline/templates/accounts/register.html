@@ -72,12 +72,8 @@
                         <p class="mt-1 text-sm text-red-600">{{ form.password1.errors.0 }}</p>
                     {% endif %}
                     {% if form.password1.help_text %}
-                        <div class="mt-1 text-xs text-gray-500 space-y-1">
-                            {% for line in form.password1.help_text|safe|split:"<li>" %}
-                                {% if line %}
-                                    <div>• {{ line|striptags }}</div>
-                                {% endif %}
-                            {% endfor %}
+                        <div class="mt-1 text-xs text-gray-500">
+                            {{ form.password1.help_text|safe }}
                         </div>
                     {% endif %}
                 </div>
