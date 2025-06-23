@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - AkriOnline{% endblock %}
+
+{% block content %}
+<section class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 via-white to-blue-50">
+    <!-- Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-1/4 right-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div class="absolute bottom-1/4 left-10 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style="animation-delay: 2s;"></div>
+    </div>
+
+    <div class="relative z-10 max-w-md w-full space-y-8">
+        <div class="text-center">
+            <!-- Logo -->
+            <div class="flex justify-center mb-6">
+                <div class="w-16 h-16 rounded-3xl gradient-primary flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <h2 class="font-display font-bold text-3xl text-gray-900 mb-2">Join AkriOnline</h2>
+            <p class="text-gray-600">Create your sustainable trading account</p>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="glass p-8 rounded-3xl border-2 border-white/20 hover-lift">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="mb-4 p-4 rounded-xl {% if message.tags == 'error' %}bg-red-100 text-red-700{% else %}bg-emerald-100 text-emerald-700{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                
+                <div>
+                    <label for="{{ form.username.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                        Username
+                    </label>
+                    <div class="relative">
+                        {{ form.username }}
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    {% if form.username.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.username.errors.0 }}</p>
+                    {% endif %}
+                    <p class="mt-1 text-xs text-gray-500">{{ form.username.help_text }}</p>
+                </div>
+
+                <div>
+                    <label for="{{ form.password1.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                        Password
+                    </label>
+                    <div class="relative">
+                        {{ form.password1 }}
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    {% if form.password1.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.password1.errors.0 }}</p>
+                    {% endif %}
+                    {% if form.password1.help_text %}
+                        <div class="mt-1 text-xs text-gray-500 space-y-1">
+                            {% for line in form.password1.help_text|safe|split:"<li>" %}
+                                {% if line %}
+                                    <div>• {{ line|striptags }}</div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="{{ form.password2.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                        Confirm Password
+                    </label>
+                    <div class="relative">
+                        {{ form.password2 }}
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    {% if form.password2.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.password2.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="flex items-center">
+                    <input id="terms" name="terms" type="checkbox" class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded" required>
+                    <label for="terms" class="ml-2 block text-sm text-gray-700">
+                        I agree to the 
+                        <a href="#" class="text-emerald-600 hover:text-emerald-500 font-medium">Terms of Service</a> 
+                        and 
+                        <a href="#" class="text-emerald-600 hover:text-emerald-500 font-medium">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full btn-primary text-white py-3 px-4 rounded-xl font-semibold hover-lift">
+                    Create Account
+                </button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-gray-600">
+                    Already have an account?
+                    <a href="{% url 'accounts:login' %}" class="font-semibold text-emerald-600 hover:text-emerald-500 transition-colors">
+                        Sign in here
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Benefits -->
+        <div class="text-center space-y-4">
+            <p class="text-gray-600 font-medium">Join 15,000+ users who are already:</p>
+            <div class="flex justify-center space-x-8 text-sm text-gray-500">
+                <div class="flex items-center space-x-1">
+                    <div class="w-2 h-2 bg-emerald-500 rounded-full"></div>
+                    <span>Trading Sustainably</span>
+                </div>
+                <div class="flex items-center space-x-1">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <span>Earning Eco Points</span>
+                </div>
+                <div class="flex items-center space-x-1">
+                    <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                    <span>Saving the Planet</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Style form inputs */
+    input[type="text"], input[type="password"] {
+        @apply w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-300;
+    }
+    
+    input[type="text"]:focus, input[type="password"]:focus {
+        @apply bg-white transform scale-105;
+    }
+</style>
+{% endblock %}

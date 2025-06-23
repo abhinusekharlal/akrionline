@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Marketplace - AkriOnline{% endblock %}
+
+{% block content %}
+<section class="min-h-screen py-20 bg-gradient-to-br from-gray-50 via-white to-emerald-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h1 class="font-display font-bold text-5xl lg:text-6xl text-gray-900 mb-6">
+                <span class="gradient-primary bg-clip-text text-transparent">Marketplace</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Marketplace features coming soon! This will be the hub for all scrap trading and reusable item exchanges.
+            </p>
+        </div>
+
+        <div class="glass p-12 rounded-3xl text-center border-2 border-emerald-100">
+            <div class="w-24 h-24 rounded-full gradient-primary mx-auto mb-8 flex items-center justify-center">
+                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                </svg>
+            </div>
+            <h2 class="font-display font-bold text-3xl text-gray-900 mb-4">Under Development</h2>
+            <p class="text-gray-600 text-lg mb-8">
+                We're building an amazing marketplace experience with AI-powered features, secure transactions, and eco-friendly trading.
+            </p>
+            <a href="{% url 'home:home' %}" class="btn-primary text-white px-8 py-3 rounded-xl font-semibold hover-lift">
+                Back to Home
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
