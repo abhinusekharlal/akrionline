@@ -7,6 +7,7 @@ from django.db.models import Avg, Q
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from django.urls import reverse
 from .models import User, DealerProfile, ScrapCategory, ScrapMaterial, DealerPrice, DealerRating, DealerInquiry
 from .forms import UserRegistrationForm, DealerRegistrationForm, DealerPriceFormSet, DealerInquiryForm
 
@@ -46,6 +47,41 @@ def register_view(request):
         form = UserRegistrationForm()
     
     return render(request, 'accounts/register.html', {'form': form})
+
+def google_login_redirect(request):
+    """Redirect to Google OAuth"""
+    # Store user type in session for social account adapter
+    user_type = request.GET.get('type', 'regular')
+    request.session['signup_user_type'] = user_type
+    return redirect('/accounts/auth/google/login/')
+
+@login_required
+def profile_view(request):
+    """User profile view"""
+    context = {
+        'user': request.user,
+        'is_dealer': hasattr(request.user, 'dealer_profile'),
+    }
+    return render(request, 'accounts/profile.html', context)
+
+@login_required
+def edit_profile(request):
+    """Edit user profile"""
+    if request.method == 'POST':
+        # Handle profile update
+        user = request.user
+        user.first_name = request.POST.get('first_name', '')
+        user.last_name = request.POST.get('last_name', '')
+        user.email = request.POST.get('email', '')
+        user.phone_number = request.POST.get('phone_number', '')
+        user.city = request.POST.get('city', '')
+        user.address = request.POST.get('address', '')
+        user.save()
+        
+        messages.success(request, 'Profile updated successfully!')
+        return redirect('accounts:profile')
+    
+    return render(request, 'accounts/edit_profile.html', {'user': request.user})
 
 @login_required
 def dealer_register_view(request):
