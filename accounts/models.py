@@ -1,8 +1,23 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
+from phonenumber_field.modelfields import PhoneNumberField
 from PIL import Image
 import os
+
+# TODO: ARCHITECTURAL IMPROVEMENT NEEDED
+# ScrapCategory and ScrapMaterial models should logically belong in the marketplace app
+# rather than accounts app. However, moving them requires careful database migration
+# to avoid breaking existing data and relationships.
+#
+# Current circular import issue:
+# - marketplace.models imports from accounts.models (ScrapCategory, ScrapMaterial)
+# - This creates tight coupling between apps
+#
+# Recommended solution:
+# 1. Create a new 'core' app for shared models like ScrapCategory and ScrapMaterial
+# 2. Or move these models to marketplace app with proper migration
+# 3. Update all imports and references accordingly
 
 class User(AbstractUser):
     """Extended User Model with dealer support"""
@@ -13,10 +28,10 @@ class User(AbstractUser):
     ]
     
     user_type = models.CharField(max_length=10, choices=USER_TYPES, default='regular')
-    phone_number = models.CharField(
-        max_length=15, 
-        validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")],
-        blank=True
+    phone_number = PhoneNumberField(
+        blank=True,
+        region='IN',  # Default to India
+        help_text="Phone number with country code (e.g., +91 9876543210)"
     )
     eco_points = models.PositiveIntegerField(default=0)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
@@ -57,7 +72,10 @@ class DealerProfile(models.Model):
     gst_number = models.CharField(max_length=15, blank=True)
     business_license = models.ImageField(upload_to='dealer_documents/', blank=True)
     business_address = models.TextField()
-    business_phone = models.CharField(max_length=15)
+    business_phone = PhoneNumberField(
+        region='IN',  # Default to India
+        help_text="Business phone number with country code (e.g., +91 9876543210)"
+    )
     business_email = models.EmailField()
     website = models.URLField(blank=True)
     
@@ -103,11 +121,11 @@ class ScrapCategory(models.Model):
     icon = models.CharField(max_length=50, blank=True, help_text="CSS icon class or emoji")
     is_active = models.BooleanField(default=True)
     sort_order = models.PositiveIntegerField(default=0)
-    
+
     class Meta:
         verbose_name_plural = "Scrap Categories"
         ordering = ['sort_order', 'name']
-    
+
     def __str__(self):
         return self.name
 
@@ -119,20 +137,22 @@ class ScrapMaterial(models.Model):
         ('C', 'Grade C (Fair)'),
         ('D', 'Grade D (Poor)'),
     ]
-    
+
     category = models.ForeignKey(ScrapCategory, on_delete=models.CASCADE, related_name='materials')
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     unit = models.CharField(max_length=20, default='kg', help_text="Unit of measurement (kg, ton, piece, etc.)")
     quality_grades = models.JSONField(default=list, help_text="List of applicable quality grades")
     is_active = models.BooleanField(default=True)
-    
+
     class Meta:
         ordering = ['category', 'name']
         unique_together = ['category', 'name']
-    
+
     def __str__(self):
         return f"{self.category.name} - {self.name}"
+
+
 
 class DealerPrice(models.Model):
     """Dealer prices for different scrap materials"""

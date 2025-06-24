@@ -1,0 +1,38 @@
+# Core Django Framework
+Django==5.2.3
+
+# Authentication and Social Login
+django-allauth==65.9.0
+
+# Phone Number Validation
+django-phonenumber-field==8.1.0
+phonenumbers==9.0.7
+
+# Image Processing
+Pillow==11.2.1
+
+# Database Support for MySQL (cPanel)
+mysqlclient==2.2.4
+
+# Environment Variables Management
+python-decouple==3.8
+
+# Production WSGI Server (optional for cPanel)
+gunicorn==21.2.0
+
+# Security and Performance (optional)
+django-cors-headers==4.3.1
+whitenoise==6.6.0
+
+# Required Dependencies (auto-installed with above packages)
+asgiref==3.8.1
+certifi==2025.6.15
+cffi==1.17.1
+charset-normalizer==3.4.2
+cryptography==45.0.4
+idna==3.10
+pycparser==2.22
+PyJWT==2.9.0
+requests==2.32.4
+sqlparse==0.5.3
+urllib3==2.5.0
