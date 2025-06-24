@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('accounts/', include('accounts.urls')),
+    path('accounts/', include('allauth.urls')),  # Add allauth URLs at main level
     path('marketplace/', include('marketplace.urls')),
 ]
 

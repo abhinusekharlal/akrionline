@@ -20,7 +20,7 @@ def login_view(request):
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             if user is not None:
-                login(request, user)
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
                 messages.success(request, f'Welcome back, {username}!')
                 next_url = request.GET.get('next', 'home:home')
                 return redirect(next_url)
@@ -37,7 +37,7 @@ def register_view(request):
             user = form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}!')
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             
             # Redirect to dealer registration if user selected dealer type
             if user.user_type == 'dealer':
@@ -53,7 +53,7 @@ def google_login_redirect(request):
     # Store user type in session for social account adapter
     user_type = request.GET.get('type', 'regular')
     request.session['signup_user_type'] = user_type
-    return redirect('/accounts/auth/google/login/')
+    return redirect('/accounts/google/login/')
 
 @login_required
 def profile_view(request):

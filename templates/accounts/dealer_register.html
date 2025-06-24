@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+
+{% block title %}Dealer Registration - AkriOnline{% endblock %}
+
+{% block content %}
+<section class="py-20 bg-gradient-to-br from-gray-50 via-white to-emerald-50 min-h-screen">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-12 reveal">
+            <h1 class="font-display font-bold text-4xl lg:text-5xl text-gray-900 mb-4">
+                Dealer <span class="gradient-primary bg-clip-text text-transparent">Registration</span>
+            </h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                Complete your dealer profile to start connecting with customers and trading scrap materials on our platform.
+            </p>
+        </div>
+
+        <div class="glass p-8 rounded-3xl border-2 border-white/20">
+            <form method="post" enctype="multipart/form-data" class="space-y-8">
+                {% csrf_token %}
+                
+                <!-- Display Messages -->
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="p-4 rounded-xl {% if message.tags == 'success' %}bg-green-100 text-green-800{% elif message.tags == 'error' %}bg-red-100 text-red-800{% else %}bg-blue-100 text-blue-800{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <!-- Form Errors -->
+                {% if form.errors %}
+                    <div class="p-4 bg-red-100 text-red-800 rounded-xl">
+                        <h4 class="font-semibold mb-2">Please correct the following errors:</h4>
+                        <ul class="list-disc list-inside space-y-1">
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    <li>{{ field|title }}: {{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <!-- Business Information -->
+                <div>
+                    <h3 class="font-display font-bold text-2xl text-gray-900 mb-6">Business Information</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="{{ form.business_name.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Business Name *
+                            </label>
+                            {{ form.business_name }}
+                        </div>
+                        <div>
+                            <label for="{{ form.business_registration_number.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Registration Number *
+                            </label>
+                            {{ form.business_registration_number }}
+                        </div>
+                        <div>
+                            <label for="{{ form.gst_number.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                GST Number
+                            </label>
+                            {{ form.gst_number }}
+                        </div>
+                        <div>
+                            <label for="{{ form.years_in_business.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Years in Business
+                            </label>
+                            {{ form.years_in_business }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div>
+                    <h3 class="font-display font-bold text-2xl text-gray-900 mb-6">Contact Information</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="{{ form.business_phone.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Business Phone *
+                            </label>
+                            {{ form.business_phone }}
+                        </div>
+                        <div>
+                            <label for="{{ form.business_email.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Business Email *
+                            </label>
+                            {{ form.business_email }}
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="{{ form.website.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Website
+                            </label>
+                            {{ form.website }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address Information -->
+                <div>
+                    <h3 class="font-display font-bold text-2xl text-gray-900 mb-6">Address Information</h3>
+                    <div>
+                        <label for="{{ form.business_address.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                            Business Address *
+                        </label>
+                        {{ form.business_address }}
+                    </div>
+                </div>
+
+                <!-- Business Details -->
+                <div>
+                    <h3 class="font-display font-bold text-2xl text-gray-900 mb-6">Business Details</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <label for="{{ form.specialization.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Specialization *
+                            </label>
+                            {{ form.specialization }}
+                            <p class="text-sm text-gray-500 mt-1">Describe the types of scrap materials you specialize in</p>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="{{ form.minimum_quantity.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Minimum Quantity
+                                </label>
+                                {{ form.minimum_quantity }}
+                            </div>
+                            <div>
+                                <label for="{{ form.operating_hours.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Operating Hours
+                                </label>
+                                {{ form.operating_hours }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="font-display font-bold text-2xl text-gray-900 mb-6">Services Offered</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="flex items-center space-x-3">
+                            {{ form.pickup_available }}
+                            <label for="{{ form.pickup_available.id_for_label }}" class="text-gray-700 font-medium">
+                                Pickup Service Available
+                            </label>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            {{ form.delivery_available }}
+                            <label for="{{ form.delivery_available.id_for_label }}" class="text-gray-700 font-medium">
+                                Delivery Service Available
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documents -->
+                <div>
+                    <h3 class="font-display font-bold text-2xl text-gray-900 mb-6">Business License</h3>
+                    <div>
+                        <label for="{{ form.business_license.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                            Upload Business License
+                        </label>
+                        {{ form.business_license }}
+                        <p class="text-sm text-gray-500 mt-1">Upload a clear image of your business license for verification</p>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="bg-blue-50 p-6 rounded-xl">
+                    <h4 class="font-semibold text-blue-900 mb-3">Important Information</h4>
+                    <ul class="text-blue-800 space-y-2 text-sm">
+                        <li>• Your dealer profile will be reviewed by our team before approval</li>
+                        <li>• Verification typically takes 2-3 business days</li>
+                        <li>• You'll receive an email notification once your profile is approved</li>
+                        <li>• Only verified dealers can set prices and receive customer inquiries</li>
+                    </ul>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex space-x-4 pt-6 border-t border-gray-200">
+                    <button type="submit" 
+                            class="flex-1 btn-primary text-white py-4 rounded-xl font-semibold text-lg hover-lift">
+                        Submit for Verification
+                    </button>
+                    <a href="{% url 'accounts:profile' %}" 
+                       class="flex-1 border border-gray-300 text-gray-700 text-center py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

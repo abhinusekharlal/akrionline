@@ -29,7 +29,4 @@ urlpatterns = [
     # Profile management
     path('profile/', views.profile_view, name='profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
-    
-    # Allauth URLs
-    path('auth/', include('allauth.urls')),
 ]

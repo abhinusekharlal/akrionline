@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+
+{% block title %}Dealer Dashboard - AkriOnline{% endblock %}
+
+{% block content %}
+<section class="py-20 bg-gradient-to-br from-gray-50 via-white to-emerald-50 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-12 reveal">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div>
+                    <h1 class="font-display font-bold text-4xl lg:text-5xl text-gray-900 mb-2">
+                        Dealer <span class="gradient-primary bg-clip-text text-transparent">Dashboard</span>
+                    </h1>
+                    <p class="text-lg text-gray-600">
+                        Welcome back, {{ dealer.business_name }}
+                    </p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <span class="inline-block px-4 py-2 rounded-full text-sm font-medium
+                        {% if dealer.verification_status == 'verified' %}
+                            bg-green-100 text-green-800
+                        {% elif dealer.verification_status == 'pending' %}
+                            bg-yellow-100 text-yellow-800
+                        {% else %}
+                            bg-red-100 text-red-800
+                        {% endif %}">
+                        {{ dealer.get_verification_status_display }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="glass p-6 rounded-3xl hover-lift border-2 border-white/20">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm font-medium">Total Materials</p>
+                        <p class="text-3xl font-bold text-emerald-600">{{ total_materials }}</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass p-6 rounded-3xl hover-lift border-2 border-white/20">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm font-medium">Average Rating</p>
+                        <p class="text-3xl font-bold text-blue-600">{{ avg_rating|floatformat:1 }}/5</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass p-6 rounded-3xl hover-lift border-2 border-white/20">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm font-medium">Total Ratings</p>
+                        <p class="text-3xl font-bold text-purple-600">{{ dealer.total_ratings }}</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass p-6 rounded-3xl hover-lift border-2 border-white/20">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm font-medium">Transactions</p>
+                        <p class="text-3xl font-bold text-orange-600">{{ dealer.total_transactions }}</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid lg:grid-cols-3 gap-8 mb-12">
+            <!-- Manage Prices -->
+            <div class="glass p-6 rounded-3xl hover-lift border-2 border-white/20">
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full gradient-primary mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-900 mb-2">Manage Prices</h3>
+                    <p class="text-gray-600 mb-4">Update your material prices and availability</p>
+                    {% if dealer.is_verified %}
+                        <a href="{% url 'accounts:manage_prices' %}" 
+                           class="btn-primary text-white px-6 py-2 rounded-xl font-semibold">
+                            Manage Prices
+                        </a>
+                    {% else %}
+                        <span class="text-gray-500 text-sm">Available after verification</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- View Profile -->
+            <div class="glass p-6 rounded-3xl hover-lift border-2 border-white/20">
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-900 mb-2">View Profile</h3>
+                    <p class="text-gray-600 mb-4">See how customers view your profile</p>
+                    <a href="{% url 'accounts:dealer_detail' dealer.id %}" 
+                       class="border border-blue-600 text-blue-600 px-6 py-2 rounded-xl font-semibold hover:bg-blue-50 transition-colors">
+                        View Profile
+                    </a>
+                </div>
+            </div>
+
+            <!-- Price Comparison -->
+            <div class="glass p-6 rounded-3xl hover-lift border-2 border-white/20">
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full bg-purple-100 mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-900 mb-2">Market Prices</h3>
+                    <p class="text-gray-600 mb-4">Compare prices with other dealers</p>
+                    <a href="{% url 'accounts:price_comparison' %}" 
+                       class="border border-purple-600 text-purple-600 px-6 py-2 rounded-xl font-semibold hover:bg-purple-50 transition-colors">
+                        View Prices
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Recent Inquiries -->
+            <div class="glass p-6 rounded-3xl border-2 border-white/20">
+                <h3 class="font-display font-bold text-xl text-gray-900 mb-6">Recent Inquiries</h3>
+                {% if recent_inquiries %}
+                    <div class="space-y-4">
+                        {% for inquiry in recent_inquiries %}
+                            <div class="p-4 bg-white/50 rounded-xl">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-semibold text-gray-900">{{ inquiry.subject }}</h4>
+                                    <span class="text-xs text-gray-500">{{ inquiry.created_at|date:"M d" }}</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-2">From: {{ inquiry.user.username }}</p>
+                                <p class="text-gray-700 text-sm">{{ inquiry.message|truncatewords:15 }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-8">
+                        <div class="text-4xl mb-2">📬</div>
+                        <p class="text-gray-600">No inquiries yet</p>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Recent Ratings -->
+            <div class="glass p-6 rounded-3xl border-2 border-white/20">
+                <h3 class="font-display font-bold text-xl text-gray-900 mb-6">Recent Ratings</h3>
+                {% if recent_ratings %}
+                    <div class="space-y-4">
+                        {% for rating in recent_ratings %}
+                            <div class="p-4 bg-white/50 rounded-xl">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="font-semibold text-gray-900">{{ rating.user.username }}</span>
+                                        <div class="flex text-yellow-400">
+                                            {% for i in "12345" %}
+                                                {% if forloop.counter <= rating.rating %}
+                                                    ⭐
+                                                {% else %}
+                                                    ☆
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-500">{{ rating.created_at|date:"M d" }}</span>
+                                </div>
+                                {% if rating.review %}
+                                    <p class="text-gray-700 text-sm">{{ rating.review|truncatewords:15 }}</p>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-8">
+                        <div class="text-4xl mb-2">⭐</div>
+                        <p class="text-gray-600">No ratings yet</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

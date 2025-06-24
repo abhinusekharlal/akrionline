@@ -1,13 +1,14 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import modelformset_factory
+from phonenumber_field.formfields import PhoneNumberField
 from .models import User, DealerProfile, DealerPrice, DealerInquiry, ScrapMaterial
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
     first_name = forms.CharField(max_length=30, required=True)
     last_name = forms.CharField(max_length=30, required=True)
-    phone_number = forms.CharField(max_length=15, required=False)
+    phone_number = PhoneNumberField(required=False, region='IN')
     user_type = forms.ChoiceField(choices=User.USER_TYPES, initial='regular')
     city = forms.CharField(max_length=100, required=False)
     
